@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144a526c284d8fa4e9bd910a450cb209, type: 3}
+  m_Name: "\u4E9E\u6D32-\u4E2D\u570B-37"
+  m_EditorClassIdentifier: 
+  area:
+    continents: 0
+    asiaNation: 0
+    europeNation: 0
+    americaNation: 0
+    africaNation: 0
+    austriaNation: 0
+  group: 1
+  Difficulties: 2
+  TargetDatas:
+  - sprite: {fileID: 21300000, guid: c2123294bf25e7947bb8cf8750476e9b, type: 3}
+    location: 0
+  - sprite: {fileID: 21300000, guid: 8433d3948b8271441a420bac06eb5f5a, type: 3}
+    location: 1
+  - sprite: {fileID: 21300000, guid: 5e4d88fa749766e47b951765863aa423, type: 3}
+    location: 4
+  items:
+  - sprite: {fileID: 21300000, guid: 80d7c095f9b7dd94d8911dd5685e70e1, type: 3}
+    location: 2
+  - sprite: {fileID: 21300000, guid: ebe8484b39e3b0644985071ca279b81b, type: 3}
+    location: 3
+  feedback:
+    feedback: {fileID: 21300000, guid: f93e37d0c9563524a9215d8a408f78bd, type: 3}
+    feedbackText: "\u6210\u529F\uFF01"
+    feedbackPoint: 10
+    feedbackSFX: {fileID: 8300000, guid: cace7be6d6f1ca44ab3e1854d904f572, type: 3}
