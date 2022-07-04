@@ -15,15 +15,17 @@ namespace Asia.UI
         [SerializeField] private Button philipineBtn;
         [SerializeField] private Button japanBtn;
         [SerializeField] private Button thailandBtn;
+        [SerializeField] private Button taiwanBtn;
 
         private void Start()
         {
             LoadScenes = new SceneLoader();
 
-            chinaBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(1); });
-            philipineBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(2); });
-            japanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(3); });
-            thailandBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(4); });
+            chinaBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(8); });
+            philipineBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(9); });
+            japanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(10); });
+            thailandBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(11); });
+            taiwanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(12); });
         }
     }
 }

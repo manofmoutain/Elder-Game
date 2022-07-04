@@ -57,7 +57,7 @@
      <Compile Include="Assets\Resource\Asia\ModelC\台灣\Scripts\UI\TaiwanDataManager.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-     <Compile Include="Assets\Resource\Global\ScreenControl.cs" />
+     <Compile Include="Assets\Resource\Global\Scripts\ScreenControl.cs" />
      <Compile Include="Assets\Resource\Asia\ModelA\中國\Scripts\UI\ChinaStartPage.cs" />
      <Compile Include="Assets\LogIn\Scripts\GetActivity.cs" />
      <Compile Include="Assets\Resource\Asia\ModelA\泰國\Scripts\UI\ThaiGroupManager.cs" />
@@ -78,7 +78,7 @@
      <Compile Include="Assets\Resource\Global\Scripts\Database\ModelANationDatabase.cs" />
      <Compile Include="Assets\Resource\Asia\ModelC\共用\Scripts\UI\ModelCSample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
-     <Compile Include="Assets\Resource\Global\ImageController.cs" />
+     <Compile Include="Assets\Resource\Global\Scripts\ImageController.cs" />
      <Compile Include="Assets\Resource\Asia\ModelA\共用\Scripts\UI\Blank.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
