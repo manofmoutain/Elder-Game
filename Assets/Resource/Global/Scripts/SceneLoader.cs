@@ -15,6 +15,11 @@ namespace Global.Scene
         {
             SceneManager.LoadScene(index);
         }
+
+        public void LoadScene(string _name)
+        {
+            SceneManager.LoadScene(_name);
+        }
     }
 }
 
