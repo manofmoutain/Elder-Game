@@ -91,6 +91,7 @@
      <Compile Include="Assets\Resource\Global\Scripts\Score.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resource\Global\Scripts\UI\HistoryRecord.cs" />
+     <Compile Include="Assets\Resource\Asia\ModelC\越南\Scripts\Database\ModelCVietnamDatabase.cs" />
      <Compile Include="Assets\Resource\Global\Scripts\Database\Difficulties.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
      <Compile Include="Assets\Resource\Asia\ModelA\菲律賓\Scripts\UI\PhilippineStartPage.cs" />
@@ -143,6 +144,7 @@
      <Compile Include="Assets\Resource\Asia\ModelA\共用\Scripts\UI\Item.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
      <Compile Include="Assets\Resource\Asia\ModelA\日本\Scripts\UI\JapanStartPage.cs" />
+     <Compile Include="Assets\Resource\Asia\ModelC\越南\Scripts\Database\LoadVietnamExcel.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
