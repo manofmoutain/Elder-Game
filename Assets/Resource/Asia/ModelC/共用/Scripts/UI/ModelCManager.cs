@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Global.Database;
 using Global.Scene;
 using Global.Score;
+using Global.SFX;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,27 +16,32 @@ namespace Asia.UI.ModelC
         [TitleGroup("資料庫"), TabGroup("資料庫/Parameters", "總資料庫"), SerializeField]
         protected List<ModelCNationDatabase> AllData;
 
-        [TabGroup("資料庫/Parameters", "群組資料庫"), SerializeField]
+        [TabGroup("資料庫/Parameters", "群組資料庫"), SerializeField , DisableInEditorMode]
         protected List<ModelCNationDatabase> groupData;
 
-        [TabGroup("資料庫/Parameters", "正在使用資料庫"), ShowInInspector]
+        [TabGroup("資料庫/Parameters", "正在使用資料庫"), ShowInInspector , DisableInEditorMode]
         public ModelCNationDatabase currentData { get; protected set; }
+
+        [TitleGroup("背景音樂"), SerializeField, Required]
+        private AudioController bgm;
+
+        [TitleGroup("範例頁"),BoxGroup("範例頁/範例頁"), SerializeField, Required]
+        private ModelCSample sample;
+
 
         public int CurrentDataTargetCount => currentData.TargetDatas.Count;
 
-        [TitleGroup("暫存"), ShowInInspector] protected Dictionary<string, TargetData> targetDic;
-        [TitleGroup("暫存"), ShowInInspector] public Sprite spriteTemp { get; protected set; }
+        [TitleGroup("暫存") , BoxGroup("暫存/出現過的Target"), ShowInInspector , DisableInEditorMode] protected Dictionary<string, TargetData> targetDic;
+        [TitleGroup("暫存"), BoxGroup("暫存/Sample出現的圖") , ShowInInspector , DisableInEditorMode] public Sprite spriteTemp { get; protected set; }
 
-        [TitleGroup("暫存"), SerializeField, Required]
-        private ModelCSample sample;
 
-        [TitleGroup("紀錄"),BoxGroup("紀錄/紀錄"), SerializeField, Required]
+        [TitleGroup("紀錄"),BoxGroup("紀錄/紀錄"), SerializeField, DisableInEditorMode]
         protected List<Record> records;
 
-        [BoxGroup("紀錄/每一題的達成率"), SerializeField]
+        [BoxGroup("紀錄/每一題的達成率"), SerializeField , DisableInEditorMode]
         protected float achieve;
 
-        [BoxGroup("紀錄/的達成率"), SerializeField] protected float achievePercent;
+        [BoxGroup("紀錄/的達成率"), SerializeField , DisableInEditorMode] protected float achievePercent;
 
 
         public Record CurrentRecord
@@ -66,6 +72,7 @@ namespace Asia.UI.ModelC
 
         private void Start()
         {
+            bgm.PlayBGM();
             Init();
         }
 
@@ -161,7 +168,7 @@ namespace Asia.UI.ModelC
                     }
 
                     SceneLoader _sceneLoader = new SceneLoader();
-                    _sceneLoader.LoadScene(0);
+                    _sceneLoader.LoadScene("0-AllMap");
                     return;
                 }
             }
