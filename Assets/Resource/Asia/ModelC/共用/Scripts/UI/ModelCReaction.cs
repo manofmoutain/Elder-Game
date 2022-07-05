@@ -11,28 +11,28 @@ namespace Asia.UI.ModelC
 {
     public class ModelCReaction : ImageController
     {
-        [TitleGroup("反應頁"),BoxGroup("反應頁/管理"),SerializeField, Required] protected ModelCManager manager;
-        [BoxGroup("反應頁/圖片"),SerializeField, Required] protected Image location;
-        [BoxGroup("反應頁/錯誤框"),SerializeField, Required] protected ErrorBorder error;
-        [BoxGroup("反應頁/按鈕"),SerializeField, Required] protected Button maru;
-        [BoxGroup("反應頁/按鈕"),SerializeField, Required] protected Button cross;
+        [TitleGroup("反應頁"),BoxGroup("反應頁/管理"),SerializeField, Required , HideLabel] protected ModelCManager manager;
+        [BoxGroup("反應頁/圖片"),SerializeField, Required , HideLabel] protected Image location;
+        [BoxGroup("反應頁/錯誤框"),SerializeField, Required , HideLabel] protected ErrorBorder error;
+        [BoxGroup("反應頁/按鈕"),SerializeField, Required , HideLabel] protected Button maru;
+        [BoxGroup("反應頁/按鈕"),SerializeField, Required , HideLabel] protected Button cross;
 
-        [TitleGroup("紀錄"),BoxGroup("紀錄/倒數"), SerializeField, DisableInEditorMode]
+        [TitleGroup("紀錄"),BoxGroup("紀錄/倒數"), SerializeField, DisableInEditorMode , HideLabel]
         protected bool isCounting;
 
-        [BoxGroup("紀錄/計時器"), SerializeField, DisableInEditorMode]
+        [BoxGroup("紀錄/計時器"), SerializeField, DisableInEditorMode , HideLabel]
         protected float timer;
 
-        [BoxGroup("紀錄/正確分數"), SerializeField]
+        [BoxGroup("紀錄/正確分數"), SerializeField , HideLabel]
         public Score correctScore { get; protected set; }
 
-        [BoxGroup("紀錄/正確的點擊時間"), ShowInInspector, DisableInEditorMode]
+        [BoxGroup("紀錄/正確的點擊時間"), ShowInInspector, DisableInEditorMode , HideLabel]
         public List<float> correctTime { get; protected set; }
 
-        [BoxGroup("紀錄/錯誤分數")]
+        [BoxGroup("紀錄/錯誤分數") , HideLabel]
         public Score wrongScore { get; protected set; }
 
-        [BoxGroup("紀錄/錯誤的點擊時間"), ShowInInspector, DisableInEditorMode]
+        [BoxGroup("紀錄/錯誤的點擊時間"), ShowInInspector, DisableInEditorMode , HideLabel]
         public List<float> wrongTime { get; protected set; }
 
 
