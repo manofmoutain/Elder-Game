@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using Global.Database;
@@ -51,3 +52,4 @@ namespace Asia.Vietnam.Database
         }
     }
 }
+#endif

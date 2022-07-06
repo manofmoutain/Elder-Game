@@ -18409,6 +18409,8 @@ MonoBehaviour:
   philipineBtn: {fileID: 678435089}
   japanBtn: {fileID: 513755884}
   thailandBtn: {fileID: 633772531}
+  taiwanBtn: {fileID: 752793195}
+  vietnamBtn: {fileID: 1056040054}
 --- !u!1 &575323429
 GameObject:
   m_ObjectHideFlags: 0
@@ -25444,7 +25446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &752793194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34567,7 +34569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1056040053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39341,6 +39343,8 @@ MonoBehaviour:
     - m_Text: "\u6CF0\u570B"
       m_Image: {fileID: 0}
     - m_Text: "\u53F0\u7063"
+      m_Image: {fileID: 0}
+    - m_Text: "\u8D8A\u5357"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

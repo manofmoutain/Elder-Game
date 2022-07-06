@@ -54,6 +54,10 @@ namespace Global.UI
                     case 5 :
                         ChangeModelC("台灣");
                         break;
+
+                    case 6 :
+                        ChangeModelC("越南");
+                        break;
                 }
             });
         }

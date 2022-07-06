@@ -16,6 +16,7 @@ namespace Asia.UI
         [SerializeField] private Button japanBtn;
         [SerializeField] private Button thailandBtn;
         [SerializeField] private Button taiwanBtn;
+        [SerializeField] private Button vietnamBtn;
 
         private void Start()
         {
@@ -26,6 +27,7 @@ namespace Asia.UI
             japanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(10); });
             thailandBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(11); });
             taiwanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(12); });
+            vietnamBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(13); });
         }
     }
 }
