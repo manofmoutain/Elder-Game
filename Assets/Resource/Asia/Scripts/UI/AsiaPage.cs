@@ -22,12 +22,12 @@ namespace Asia.UI
         {
             LoadScenes = new SceneLoader();
 
-            chinaBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(8); });
-            philipineBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(9); });
-            japanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(10); });
-            thailandBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(11); });
-            taiwanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(12); });
-            vietnamBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(13); });
+            chinaBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(7); });
+            philipineBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(8); });
+            japanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(9); });
+            thailandBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(10); });
+            taiwanBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(11); });
+            vietnamBtn.onClick.AddListener(delegate { LoadScenes.LoadScene(12); });
         }
     }
 }
