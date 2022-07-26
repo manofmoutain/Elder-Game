@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ScreenInit : MonoBehaviour
 {
-#if PLATFORM_ANDROID
-
-
     [SerializeField] private ScreenControl ScreenControl;
     [SerializeField] private ScreenPortrait screenPortrait = ScreenPortrait.橫放;
 
@@ -30,6 +27,4 @@ public class ScreenInit : MonoBehaviour
                 break;
         }
     }
-
-#endif
 }
