@@ -6464,7 +6464,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 129.6
+  m_fontSize: 230.95
   m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7554,7 +7554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1582693955
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10878,6 +10878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e58fb5a3d41554cb12b299e820dbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenPortrait: 1
 --- !u!114 &2137106104
 MonoBehaviour:
   m_ObjectHideFlags: 0
