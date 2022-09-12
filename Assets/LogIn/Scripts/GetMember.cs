@@ -10,9 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class GetMember : MonoBehaviour
 {
-    string url = "http://ring.nutc.edu.tw/garmin/Joyce/sel.php";
+    string url = "http://ring.nutc.edu.tw/garmin/Joyce/get_Member.php";
 
-    public TMP_Text Membertxt;
+    public TMP_Text[] Membertxt = new TMP_Text[14];
     private string account;
     private string password;
 
@@ -46,16 +46,13 @@ public class GetMember : MonoBehaviour
         }
         Debug.Log(www.text);
 
-        Membertxt.text = www.text.Replace("</next>", "\n");
-        var received_data = Regex.Split(www.text, "</next>");
-        /*int cnt = (received_data.Length) / 4;
-        for (int i = 0; i < cnt; i++)
+        var received_data = Regex.Split(www.text, "</next></next>");
+        
+        for (int i = 0; i < 6; i++)
         {
-            myfieldid[i] = received_data[3 * i];
-            end[i] = received_data[3 * i + 1 ];
-            fweeding[i] = received_data[3 * i + 2];
+            Membertxt[i].text = received_data[i];
         }
-        Debug.Log(cnt);*/
+        
 
     }
 }

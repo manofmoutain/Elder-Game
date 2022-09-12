@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -10,9 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class GetDaily : MonoBehaviour
 {
-    string url = "http://ring.nutc.edu.tw/garmin/Joyce/sel.php";
+    string url = "http://ring.nutc.edu.tw/garmin/Joyce/get_Daily.php";
 
-    public TMP_Text Dailytxt;
+    public TMP_Text[] Membertxt = new TMP_Text[7];
     private string account;
     private string password;
 
@@ -30,46 +30,74 @@ public class GetDaily : MonoBehaviour
         
     }
     void Update() {
-      matchHeight();
+      //matchHeight();
     }
     IEnumerator GetDailies()
     {
         account=SignIn.account;
         password=SignIn.password;
-        account="qqnice@gm.nutc.edu.tw";
-        password="QQnice22";
-        //æŸ¥è³‡æ–™  userid 
+        //account="qqnice@gm.nutc.edu.tw";
+        //password="QQnice22";
+        //¬d¸ê®Æ  userid 
         WWWForm form = new WWWForm();
         form.AddField("action", "GetDaily");
-        form.AddField("account", account);
-        form.AddField("password", password);
+        form.AddField("account", "jimmy880316@gmail.com");
+        form.AddField("password", "jimmy1999");
         WWW www = new WWW(url, form);
 
         yield return www;
 
+        var received_data = Regex.Split(www.text, "</next>");
         if (!string.IsNullOrEmpty(www.error))
         {
             Debug.Log(www.error);
+        }else{
+            Debug.Log(www.text);
+            //¹B°Ê >=30min ¹F¼Ð
+            Membertxt[0].text = received_data[0] + "¤ÀÄÁ";
+            if (int.Parse(received_data[1])>=30){
+                Membertxt[0].color = new Color32(45,166,0,255);
+            }else{
+                Membertxt[0].color = new Color32(73,72,67,255);
+            }
+            //ºÎ¯v >6hr ¹F¼Ð
+            if (received_data[1]=="0"){ //60¤ÀÄÁ¥H¤º
+                Membertxt[1].text = received_data[2] + "¤ÀÄÁ";
+                Membertxt[0].color = new Color32(73,72,67,255);
+            }else{
+                Membertxt[1].text = received_data[1] + "¤p®É" + received_data[2]+"¤ÀÄÁ";
+                if (int.Parse(received_data[1])>=6){
+                    Membertxt[1].color = new Color32(45,166,0,255);
+                }else{
+                    Membertxt[1].color = new Color32(73,72,67,255);
+                }
+            }
+            //¥Í¬¡±´´ú¾¹
+            Membertxt[3].text = "¥¼§¹¦¨";
+            //°·±d¤p¾Ç°ó
+            Membertxt[4].text = "¥¼§¹¦¨";
+            //ªÀ¥æ¤p¹F¤H
+            Membertxt[5].text = "¥¼§¹¦¨";
+            //ÂôÃö¹CÀ¸
+            Membertxt[6].text = "¥¼§¹¦¨";
         }
-        Debug.Log(www.text);
+        
 
-        Dailytxt.text = www.text;
-        Dailytxt.text = www.text.Replace("</next>", "\n");
-        var received_data = Regex.Split(www.text, "</next>");
-        int cnt = (received_data.Length) / 4;
+        
+        //int cnt = (received_data.Length) / 4;
         /*for (int i = 0; i < cnt; i++)
         {
             myfieldid[i] = received_data[3 * i];
             end[i] = received_data[3 * i + 1 ];
             fweeding[i] = received_data[3 * i + 2];
         }*/
-        Debug.Log(cnt);
+        //Debug.Log(cnt);
     }
 
     //set content size
     public void matchHeight()
     {
-        var height = Dailytxt.GetComponent<RectTransform>().rect.height+100;
-        content.sizeDelta=new Vector2(0, height);
+        //var height = Dailytxt.GetComponent<RectTransform>().rect.height+100;
+        //content.sizeDelta=new Vector2(0, height);
     }
 }

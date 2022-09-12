@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//del 不需要了
 
 public class SignInUrl : MonoBehaviour
 {

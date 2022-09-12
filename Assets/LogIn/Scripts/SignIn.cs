@@ -15,7 +15,7 @@ public class SignIn : MonoBehaviour
     string url = "http://ring.nutc.edu.tw/garmin/Joyce/sel.php";
     public TMP_InputField accounttxt;
     public TMP_InputField passwordtxt;
-    public TMP_Text errortxt;
+    public GameObject errorGameobj;
     public static string account;
     public static string password;
     public static string userid;
@@ -64,8 +64,7 @@ public class SignIn : MonoBehaviour
         if(www.text=="Success"){
             SceneManager.LoadScene("menu");
         }else{
-            errortxt.gameObject.SetActive(true);
-            errortxt.text = www.text;
+            errorGameobj.gameObject.SetActive(true);
         }
  
     }
