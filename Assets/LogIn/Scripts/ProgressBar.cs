@@ -16,11 +16,8 @@ public class ProgressBar : MonoBehaviour
         obj.transform.SetParent(Selection.activeGameObject.transform,false);
     }
     #endif
-    public int maximum;
-    public int current;
     public Image mask;
     public Image fill;
-    public Color color;
 
     // Start is called before the first frame update
     void Start()
@@ -31,9 +28,8 @@ public class ProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetCurrentFill();
     }
-    void GetCurrentFill(){
+    public void GetCurrentFill(float maximum, float current,Color color){
         float fillAmount = (float)current / (float)maximum;
         mask.fillAmount = fillAmount;
         fill.color = color;

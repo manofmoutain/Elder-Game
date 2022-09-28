@@ -26,6 +26,8 @@ public class WebViewForm : MonoBehaviour
 	private string idKey;
 	private string nameKey;
 
+	public TMP_Text debugtxt;
+
 	WebViewCallbackTest m_callback;
 
 	// Use this for initialization
@@ -100,6 +102,7 @@ public class WebViewForm : MonoBehaviour
             Debug.Log(www.error);
         }
         Debug.Log(www.text);
+		debugtxt.text=www.text;
 
         if(www.text!=null){
 			/*0</next>

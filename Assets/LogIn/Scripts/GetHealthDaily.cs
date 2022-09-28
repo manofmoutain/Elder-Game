@@ -41,7 +41,7 @@ public class GetHealthDaily : MonoBehaviour
 
         yield return www;
         var received_data = Regex.Split(www.text, "</next></next>");
-        if (!string.IsNullOrEmpty(www.error) || received_data[0] == "0" )
+        if (string.IsNullOrEmpty(www.error) || received_data[0] == "0" )
         {
             Debug.Log(www.error);
             Membertxt[0].text = "心率 : 無資料";
