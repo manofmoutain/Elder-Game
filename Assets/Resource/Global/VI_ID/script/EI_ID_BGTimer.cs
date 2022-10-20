@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace EI_VA
+namespace EI_ID
 {
-public class EI_VA_BGTimer : MonoBehaviour
+public class EI_ID_BGTimer : MonoBehaviour
 {
         // Start is called before the first frame update
 
         [SerializeField] GameObject ChangImager;
 
-        private EI_VA_changImg EVC;
+        private EI_ID_changImg EVC;
         public List<float> currectTime;
         public List<float> mistakeTime;
         private bool stop = false;
@@ -20,7 +20,7 @@ public class EI_VA_BGTimer : MonoBehaviour
         private void Start()
         {
 
-            EVC = ChangImager.GetComponent<EI_VA_changImg>();
+            EVC = ChangImager.GetComponent<EI_ID_changImg>();
         }
         void startBGTime() { 
               

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EI_VA
+namespace EI_ID
 {
-    public class EI_VA_countScore : MonoBehaviour
+    public class EI_ID_countScore : MonoBehaviour
     {
         // Start is called before the first frame update
         public float totle;
@@ -16,11 +16,11 @@ namespace EI_VA
         [SerializeField] GameObject ChangImager;
         [SerializeField] private GameObject currectUI;
         [SerializeField] private GameObject mistakeUI;
-        private EI_VA_changImg EVC;
+        private EI_ID_changImg EVC;
         private void Start()
         {
 
-            EVC = ChangImager.GetComponent<EI_VA_changImg>();
+            EVC = ChangImager.GetComponent<EI_ID_changImg>();
         }
         /// <summary>
         /// 

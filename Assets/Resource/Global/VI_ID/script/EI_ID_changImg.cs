@@ -4,9 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace EI_VA
+namespace EI_ID
 {
-    public class EI_VA_changImg : MonoBehaviour
+    public class EI_ID_changImg : MonoBehaviour
     {
 
         [SerializeField] Image img;
@@ -15,8 +15,8 @@ namespace EI_VA
         [SerializeField] List<string> sprites;
         [SerializeField] Sprite red;
         [SerializeField] Sprite green;
-        private EI_VA_BGTimer BGT;
-        private EI_VA_countScore EVS;
+        private EI_ID_BGTimer BGT;
+        private EI_ID_countScore EVS;
         [SerializeField] string colorString;
         [SerializeField] List<Sprite> spriter;
         private bool cORm;
@@ -25,8 +25,8 @@ namespace EI_VA
         private void Start()
         {
 
-            BGT = BGTimer.GetComponent<EI_VA_BGTimer>();
-            EVS = counter.GetComponent<EI_VA_countScore>();
+            BGT = BGTimer.GetComponent<EI_ID_BGTimer>();
+            EVS = counter.GetComponent<EI_ID_countScore>();
             string value = sprites[Random.Range(0, 2)];
             List<string> spriteList=value.Split(' ').ToListPooled();
             for(int index = 0; index < 10; index++)
