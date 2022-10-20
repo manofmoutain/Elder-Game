@@ -7,10 +7,6 @@ public class EI_VA_function
 {
     // Start is called before the first frame update
     
-    public float totle;
-        public float currect;
-        public float dismiss;
-        public float miss;
         // Start is called before the first frame update
 
 
@@ -20,7 +16,7 @@ public class EI_VA_function
         
 
 
-        public IEnumerator WaitTimer(float time) { 
+        public static IEnumerator WaitTimer(float time) { 
         yield return new WaitForSeconds(time);
         }
 

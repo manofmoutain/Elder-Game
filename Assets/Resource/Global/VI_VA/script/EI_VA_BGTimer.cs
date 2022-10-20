@@ -8,12 +8,20 @@ namespace EI_VA
 public class EI_VA_BGTimer : MonoBehaviour
 {
         // Start is called before the first frame update
-        
+
+        [SerializeField] GameObject ChangImager;
+
+        private EI_VA_changImg EVC;
         public List<float> currectTime;
         public List<float> mistakeTime;
         private bool stop = false;
         private float timer;
         private Coroutine c1, c2;
+        private void Start()
+        {
+
+            EVC = ChangImager.GetComponent<EI_VA_changImg>();
+        }
         void startBGTime() { 
               
         }
@@ -39,6 +47,7 @@ public class EI_VA_BGTimer : MonoBehaviour
         }
         public float getTime()
         {
+            Debug.Log(timer);
             stop = true;
             StopCoroutine(c1);
             c1 = null;
@@ -46,17 +55,24 @@ public class EI_VA_BGTimer : MonoBehaviour
         }
         public IEnumerator Timer()
         {
+            stop = false;
+
             while (!stop)
             {
                 timer += Time.deltaTime;
-                if (timer <= 1) {
+                if (timer >=1) {
                     stop = true;
-                    
+                   
+                    EVC.scoreflag = 2;
+
+                    EVC.CountScore();
                     break;
                 }
-                Debug.Log(timer);
                 yield return null;
             }
+            
+
+
             yield return null;
 
         }
