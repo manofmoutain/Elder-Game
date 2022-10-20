@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace EI_ID
 {
@@ -42,7 +43,8 @@ namespace EI_ID
                     spriter.Add(green);
                 }
             }
-            
+
+            img.sprite = spriter[i];
         }
         public void change(Sprite s)
         {
@@ -71,9 +73,7 @@ namespace EI_ID
         }
             public void nextTest()
         {
-            
-
-            if (spriter[i + 1] != null)
+            if (i<spriter.Count-1)
             {
                 i++;
                 change(spriter[i]);
@@ -81,12 +81,13 @@ namespace EI_ID
             }
             else
             {
+                Debug.Log("Nexr");
                 gameFinal();
             }
         }
         private void gameFinal()
         {
-
+            SceneManager.LoadScene("nextScnce");
         }
        
         /*
