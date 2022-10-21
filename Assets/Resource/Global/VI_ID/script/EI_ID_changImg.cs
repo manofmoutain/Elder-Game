@@ -84,9 +84,7 @@ namespace EI_ID
                 }
                 else
                 {
-                    
                         scoreflag = 1;
-                    
                 }
             }
             else
@@ -101,8 +99,8 @@ namespace EI_ID
                 else
                 {
                     if (scoreflag == 2)
-                    {/*
-                        scoreflag = 0;*/
+                    {
+                        scoreflag = 0;
 
                     }
                     else
@@ -119,7 +117,8 @@ namespace EI_ID
             if (i<spriter.Count-1)
             {
                 i++;
-                change(spriter2[i],true);
+                if (img2 != null) {change(spriter2[i],true); }
+                
                 change(spriter[i]);
                 BGT.startTimer();
             }
@@ -131,7 +130,15 @@ namespace EI_ID
         }
         private void gameFinal()
         {
-            SceneManager.LoadScene("nextScnce");
+            if (EVS.totle >= 80)
+            {
+                SceneManager.LoadScene("0-AllMap");
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            
         }
        
         /*
