@@ -65,7 +65,7 @@ public class EI_ID_BGTimer : MonoBehaviour
                    
                     EVC.scoreflag = 2;
 
-                    EVC.CountScore();
+                    EVC.CountScore(false);
                     break;
                 }
                 yield return null;

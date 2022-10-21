@@ -11,6 +11,9 @@ namespace EI_ID
     {
 
         [SerializeField] Image img;
+
+        [SerializeField] Image img2=null;
+        [SerializeField] List<Sprite> spriter2=null;
         [SerializeField] GameObject BGTimer;
         [SerializeField] GameObject counter;
         [SerializeField] List<string> sprites;
@@ -37,45 +40,86 @@ namespace EI_ID
                 if (e.Equals(colorString))
                 {
                     spriter.Add(red);
+                    if (img2 != null) { spriter2.Add(green); }
                 }
                 else
                 {
                     spriter.Add(green);
+                    if (img2 != null) { spriter2.Add(red); }
                 }
             }
 
             img.sprite = spriter[i];
         }
-        public void change(Sprite s)
+        public void change(Sprite s,bool side=false)
         {
+            if (side) { img2.sprite = s; }
+            else
+            {
+                img.sprite = s;
+            }
+        }
+        public void timeStop(bool side)
+        {
+            if (side) { 
+                if (spriter2[i] == red) { cORm = true; } else { cORm = false; }
+            } else
+            {
+                if (spriter[i] == red) { cORm = true; } else { cORm = false;}
+            }
             
-            img.sprite = s;
-        }
-        public void starter()
-        {
-            //BGT.startTimer();
-
-            change(spriter[i]);
-        }
-        public void timeStop()
-        {
-            if (spriter[i] == red) { cORm = true; } else { cORm = false;}
 
             BGT.timeSet(cORm);
-            CountScore();
+            CountScore(side);
         }
-        public void CountScore()
+        public void CountScore(bool side)
         {
             Debug.Log(scoreflag);
-            if (spriter[i] == red) { if (scoreflag != 2) { scoreflag = 0; } } else { if (scoreflag == 2) { scoreflag = 0; } else { scoreflag = 1; } }
+            if (side)
+            {
+                if (spriter2[i] == red)
+                {
+                    
+                        scoreflag = 0;
+                }
+                else
+                {
+                    
+                        scoreflag = 1;
+                    
+                }
+            }
+            else
+            {
+                if (spriter[i] == red)
+                {
+                    if (scoreflag != 2)
+                    {
+                        scoreflag = 0;
+                    }
+                }
+                else
+                {
+                    if (scoreflag == 2)
+                    {/*
+                        scoreflag = 0;*/
+
+                    }
+                    else
+                    {
+                        scoreflag = 1;
+                    }
+                }
+            }
+            
             EVS.switchScore(scoreflag);
-           
         }
             public void nextTest()
         {
             if (i<spriter.Count-1)
             {
                 i++;
+                change(spriter2[i],true);
                 change(spriter[i]);
                 BGT.startTimer();
             }
