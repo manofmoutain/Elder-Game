@@ -12,9 +12,10 @@ using UnityEngine.SceneManagement;
 
 public class SignIn : MonoBehaviour
 {
-    string url = "http://ring.nutc.edu.tw/garmin/Joyce/sel.php";
+    string url = "http://ring.nutc.edu.tw/garmin/Joyce/login.php";
     public TMP_InputField accounttxt;
     public TMP_InputField passwordtxt;
+    public Toggle Isrem;
     public GameObject errorGameobj;
     public static string account;
     public static string password;
@@ -23,6 +24,13 @@ public class SignIn : MonoBehaviour
     void Start()
     {
         Debug.Log("SignIn");
+        errorGameobj.SetActive(false);
+        if(PlayerPrefs.HasKey("account") && PlayerPrefs.HasKey("password")){
+            account = PlayerPrefs.GetString("account");
+            password = PlayerPrefs.GetString("password");
+            GetComponent<GetUserID>().gostart(account,password);
+        }
+        
     }
     public void gostart()
     {
@@ -36,9 +44,7 @@ public class SignIn : MonoBehaviour
 
             account = accounttxt.text;
             password = passwordtxt.text;
-
             StartCoroutine(login());
-
         }
         
     }
@@ -62,7 +68,13 @@ public class SignIn : MonoBehaviour
 
         //判斷帳密是否正確，正確->換頁，錯誤->顯示錯誤訊息
         if(www.text=="Success"){
-            SceneManager.LoadScene("menu");
+            if(Isrem.isOn){
+                PlayerPrefs.SetString("account", account);
+                PlayerPrefs.SetString("password", password);
+            }else{
+                PlayerPrefs.DeleteKey("password");
+            }
+            GetComponent<GetUserID>().gostart(account,password);
         }else{
             errorGameobj.gameObject.SetActive(true);
         }

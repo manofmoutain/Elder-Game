@@ -2,3 +2,6 @@ SWEIB2SUGARCJKTC-MEDIUM[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
 SWEIB2SUGARCJKTC-MEDIUM filter=lfs diff=lfs merge=lfs -text
 msjhbd[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
 Assets/LogIn/Fonts/SWEIB2SUGARCJKTC-MEDIUM[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Assets/LogIn/Fonts/NotoSansTC-Bold.otf filter=lfs diff=lfs merge=lfs -text
+Assets/LogIn/Fonts/NotoSansTC-Medium[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+Assets/LogIn/Fonts/NotoSansTC-Medium.otf filter=lfs diff=lfs merge=lfs -text

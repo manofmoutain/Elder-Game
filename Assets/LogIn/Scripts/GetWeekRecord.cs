@@ -12,33 +12,59 @@ public class GetWeekRecord : MonoBehaviour
 {
     string url = "http://ring.nutc.edu.tw/garmin/Joyce/get_WeekRecord.php";
     public TMP_Text debugtxt;
-    public TMP_Text[] Valuetxt = new TMP_Text[6];
-    public TMP_Text[] Ranktxt = new TMP_Text[6];
-    public GameObject BadgeGroup;
+    public TMP_Text datetxt;
+    public TMP_Text[] Valuetxt = new TMP_Text[5];
     public GameObject[] Progressbar;
-    public Sprite done;
-    public Sprite notyet;
+    public Image[] BadgeImg;
+    public Image[] rankImg;
+    public Sprite[] BadgedoneSprite;
+    public Sprite[] progressdoneSprite;
+    public Sprite[] rankSprite;
+    
 
     private string account;
     private string password;
-    private int rewardcnt;
-    private Image[] badges;
+    
     void Start()
     {
-        StartCoroutine(GetWeekRecords());
+        
     }
     void Update(){}
     public void gostart()
     {
         Debug.Log("gostart");
-        rewardcnt = 0;
+        setDate();
         StartCoroutine(GetWeekRecords());
-        
     }
+    private void setDate(){
+        DateTime begin = DateTime.Now.AddDays(-6);
+        DateTime finish = DateTime.Now;
+        datetxt.text = begin.Year + "年" + begin.Month + "月" + begin.Day + "日 " + weekENtoZW(begin.DayOfWeek.ToString()) + "\n至\n" + finish.Year + "年" + finish.Month + "月" + finish.Day + "日 " + weekENtoZW(finish.DayOfWeek.ToString());
+    }
+    private string weekENtoZW(string week){
+        Debug.Log(week);
+        if(week == "Monday"){
+            return  "週一";
+        }else if(week == "Tuesday"){
+            return "週二";
+        }else if(week == "Wednesday"){
+            return "週三";
+        }else if(week == "Thursday"){
+            return "週四";
+        }else if(week == "Friday"){
+           return "週五";
+        }else if(week == "Saturday"){
+            return "週六";
+        }else{
+            return "週日";
+        }
+    }
+    
     IEnumerator GetWeekRecords()
     {
         account=SignIn.account;
         password=SignIn.password;
+        
         //查資料  userid 
         WWWForm form = new WWWForm();
         form.AddField("action", "GetWeekRecord");
@@ -47,114 +73,72 @@ public class GetWeekRecord : MonoBehaviour
         WWW www = new WWW(url, form);
 
         yield return www;
+        // 5項指標的等級 與 顏色
+        Color red = new Color32(244, 32, 38, 255);
+        Color yellow = new Color32(242, 154, 20, 255);
+        Color green = new Color32(110,192,81,255);
 
         var received_data = Regex.Split(www.text, "</next>");
-        if (string.IsNullOrEmpty(www.error)){
+        //var received_data = Regex.Split("99</next>7.5</next>8</next>10</next>2", "</next>");
+
+        if (string.IsNullOrEmpty(www.text)){
             Debug.Log(www.error);
             debugtxt.text = www.error;
-            Valuetxt[0].text = "運動  無資料";
-            Valuetxt[1].text = "睡眠  無資料";
-            Valuetxt[2].text = "生活探測器  0分";
-            Valuetxt[3].text = "健康小學堂  0分";
-            Valuetxt[4].text = "社交小達人  0分";
-            Valuetxt[5].text = "動腦時間  0關";
-            
-            for(int i =0; i<6 ; i++){
-                Ranktxt[i].gameObject.SetActive(false);
-                Progressbar[i].GetComponent<ProgressBar>().GetCurrentFill(150,0,new Color32(45,166,0,255));
-            }
 
+            for(int i =0; i<5 ; i++){
+                Valuetxt[i].text = "0";
+                Progressbar[i].GetComponent<ProgressBar>().GetCurrentFillRewardBar(150,0,red,progressdoneSprite[0]);
+                rankImg[i].sprite = rankSprite[0];
+            }
+            
         }else{
             Debug.Log(www.text);
             debugtxt.text = www.text;
-            // 6項指標的值
-            Valuetxt[0].text = "運動  " + received_data[0] + "分鐘";
-            Valuetxt[1].text = "睡眠  " + received_data[1] + "小時";
-            Valuetxt[2].text = "生活探測器  " + received_data[2] + "分";
-            Valuetxt[3].text = "健康小學堂  " + received_data[3] + "分";
-            Valuetxt[4].text = "社交小達人  " + received_data[4] + "分";
-            Valuetxt[5].text = "動腦時間  " + received_data[5] + "關";
 
-            // 6項指標的等級 與 顏色
-            Color colorBlack = new Color32(73, 72, 67, 255);
-            Color colorGreen = new Color32(45, 166, 0, 255);
-            Color colorYellow = new Color32(255, 211, 69, 255);
-            Color colorRed = new Color32(255, 83, 83, 255);
+            // 5項指標的值
+            for (int i = 0; i < 5; i++){
+                Valuetxt[i].text = received_data[i];
+            }
+            
             // 0運動 改顏色 >=150(優秀) >=75(良好) <75(再加油)
             if(Int32.Parse(received_data[0])>=150){
-                Ranktxt[0].text = "優秀";
-                Ranktxt[0].color = colorGreen;
-                Progressbar[0].GetComponent<ProgressBar>().GetCurrentFill(150,Int32.Parse(received_data[0]),colorGreen);
-                rewardcnt++;
-            }else if(Int32.Parse(received_data[0])>=150){
-                Ranktxt[0].text = "良好";
-                Ranktxt[0].color = colorBlack;
-                Progressbar[0].GetComponent<ProgressBar>().GetCurrentFill(150,Int32.Parse(received_data[0]),colorYellow);
+                BadgeImg[0].sprite = BadgedoneSprite[0];
+                rankImg[0].sprite = rankSprite[2];
+                Progressbar[0].GetComponent<ProgressBar>().GetCurrentFillRewardBar(150,150,green,progressdoneSprite[1]);
+            }else if(Int32.Parse(received_data[0])>=75){
+                rankImg[0].sprite = rankSprite[1];
+                Progressbar[0].GetComponent<ProgressBar>().GetCurrentFillRewardBar(150,Int32.Parse(received_data[0]),yellow,progressdoneSprite[0]);
             }else{
-                Ranktxt[0].text = "再加油";
-                Ranktxt[0].color = colorRed;
-                Progressbar[0].GetComponent<ProgressBar>().GetCurrentFill(150,Int32.Parse(received_data[0]),colorRed);
+                rankImg[0].sprite = rankSprite[0];
+                Progressbar[0].GetComponent<ProgressBar>().GetCurrentFillRewardBar(150,Int32.Parse(received_data[0]),red,progressdoneSprite[0]);
             }
             // 1睡眠 改顏色 >=7(優秀) >=6(良好) 0<6小時(再加油)
-            if(Int32.Parse(received_data[5])>=7){
-                Ranktxt[1].text = "優秀";
-                Ranktxt[1].color = colorGreen;
-                Progressbar[1].GetComponent<ProgressBar>().GetCurrentFill(7,7,colorGreen);
-                rewardcnt++;
-            }else if(Int32.Parse(received_data[5])>=6){
-                Ranktxt[1].text = "良好";
-                Ranktxt[1].color = colorBlack;
-                Progressbar[1].GetComponent<ProgressBar>().GetCurrentFill(7,6,colorYellow);
+            if(float.Parse(received_data[0])>=7){
+                BadgeImg[1].sprite = BadgedoneSprite[1];
+                rankImg[1].sprite = rankSprite[2];
+                Progressbar[1].GetComponent<ProgressBar>().GetCurrentFillRewardBar(7,7,green,progressdoneSprite[1]);
+            }else if(float.Parse(received_data[0])>=6){
+                rankImg[1].sprite = rankSprite[1];
+                Progressbar[1].GetComponent<ProgressBar>().GetCurrentFillRewardBar(7,float.Parse(received_data[1]),yellow,progressdoneSprite[0]);
             }else{
-                Ranktxt[1].text = "再加油";
-                Ranktxt[1].color = colorRed;
-                Progressbar[1].GetComponent<ProgressBar>().GetCurrentFill(7,5,colorRed);
+                rankImg[1].sprite = rankSprite[0];
+                Progressbar[1].GetComponent<ProgressBar>().GetCurrentFillRewardBar(7,float.Parse(received_data[1]),red,progressdoneSprite[0]);
             }
             // 2生 3健 4社 改顏色 567(優秀) 34(良好) 012(再加油) 
             for(int i = 2 ; i<5 ; i++){ 
                 if(Int32.Parse(received_data[i])>=5){
-                    Ranktxt[i].text = "優秀";
-                    Ranktxt[i].color = colorGreen;
-                    rewardcnt++;
-                    Progressbar[i].GetComponent<ProgressBar>().GetCurrentFill(7,Int32.Parse(received_data[i]),colorGreen);
-
+                    BadgeImg[i].sprite = BadgedoneSprite[i];
+                    rankImg[i].sprite = rankSprite[2];
+                    Progressbar[i].GetComponent<ProgressBar>().GetCurrentFillRewardBar(7,7,green,progressdoneSprite[1]);
                 }else if(Int32.Parse(received_data[i])>=3){
-                    Ranktxt[i].text = "良好";
-                    Ranktxt[i].color = colorBlack;
-                    Progressbar[i].GetComponent<ProgressBar>().GetCurrentFill(7,Int32.Parse(received_data[i]),colorYellow);
-
+                    rankImg[i].sprite = rankSprite[1];
+                    Progressbar[i].GetComponent<ProgressBar>().GetCurrentFillRewardBar(7,Int32.Parse(received_data[i]),yellow,progressdoneSprite[0]);
                 }else{
-                    Ranktxt[i].text = "再加油";
-                    Ranktxt[i].color = colorRed;
-                    Progressbar[i].GetComponent<ProgressBar>().GetCurrentFill(7,Int32.Parse(received_data[i]),colorRed);
-
+                    rankImg[i].sprite = rankSprite[0];
+                    Progressbar[i].GetComponent<ProgressBar>().GetCurrentFillRewardBar(7,Int32.Parse(received_data[i]),red,progressdoneSprite[0]);
                 }
             }
-            // 5動腦時間 改顏色 >=6(優秀) 345(良好) 012(再加油)
-            if(Int32.Parse(received_data[5])>=6){ 
-                Ranktxt[5].text = "優秀";
-                Ranktxt[5].color = colorGreen;
-                Progressbar[5].GetComponent<ProgressBar>().GetCurrentFill(6,Int32.Parse(received_data[5]),colorGreen);
-                rewardcnt++;
-            }else if(Int32.Parse(received_data[5])>=3){
-                Ranktxt[5].text = "良好";
-                Ranktxt[5].color = colorBlack;
-                Progressbar[5].GetComponent<ProgressBar>().GetCurrentFill(6,Int32.Parse(received_data[5]),colorYellow);
-            }else{
-                Ranktxt[5].text = "再加油";
-                Ranktxt[5].color = colorRed;
-                Progressbar[5].GetComponent<ProgressBar>().GetCurrentFill(6,Int32.Parse(received_data[5]),colorRed);
-            }
-        }
-        
-
-        badges = BadgeGroup.GetComponentsInChildren<Image>();
-        for(int i = 0 ; i<rewardcnt ; i++){
-            badges[i].sprite = done;
-        }
-        for(int i = rewardcnt ; i<6 ; i++){
-            badges[i].sprite = notyet;
-        }
+            
+        }   
     }
-        
 }

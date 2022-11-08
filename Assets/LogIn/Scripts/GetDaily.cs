@@ -11,110 +11,107 @@ using UnityEngine.SceneManagement;
 public class GetDaily : MonoBehaviour
 {
     string url = "http://ring.nutc.edu.tw/garmin/Joyce/get_Daily.php";
-
     public TMP_Text[] Membertxt = new TMP_Text[6];
-    public TMP_Text debugtxt;
-    public TMP_Text datetxt;
+    //public TMP_Text debugtxt;
+    
+    public GameObject[] progessCircle;
+    public Image[] doneImg;
+    public Sprite[] sprite;
     private string account;
     private string password;
 
-    public RectTransform content;
+    //public RectTransform content;
 
     void Start()
     {
-        StartCoroutine(GetDailies());
+        StartCoroutine(GetDailies(DateTime.Now.Date.ToString("yyyy-MM-dd")));
+        TMP_Text datetxt = GameObject.Find("selDate").GetComponent<TMP_Text>(); //通過名字，找到畫面中的相應物件
+        datetxt.text = DateTime.Now.Year + "年" + DateTime.Now.Month + "月" + DateTime.Now.Day + "日 " + weekENtoZW(DateTime.Now.DayOfWeek.ToString());
+        
     }
-    public void gostart()
+    public void gostart(string date)
     {
         Debug.Log("gostart");
-
-        StartCoroutine(GetDailies());
+        StartCoroutine(GetDailies(date));
         
+        
+    }
+    private string weekENtoZW(string week){
+        Debug.Log(week);
+        if(week == "Monday"){
+            return  "周一";
+        }else if(week == "Tuesday"){
+            return "周二";
+        }else if(week == "Wednesday"){
+            return "周三";
+        }else if(week == "Thursday"){
+            return "周四";
+        }else if(week == "Friday"){
+           return "周五";
+        }else if(week == "Saturday"){
+            return "周六";
+        }else{
+            return "周日";
+        }
     }
     void Update() {
       //matchHeight();
     }
-    IEnumerator GetDailies()
+    IEnumerator GetDailies(string targetdate)
     {
         account=SignIn.account;
         password=SignIn.password;
-        //account="qqnice@gm.nutc.edu.tw";
-        //password="QQnice22";
+        
         //查資料  userid 
         WWWForm form = new WWWForm();
         form.AddField("action", "GetDaily");
         form.AddField("account", account);
         form.AddField("password", password);
-        datetxt.text = DateTime.Now.Date.ToString("yyyy-MM-dd");
-        form.AddField("date", DateTime.Now.Date.ToString("yyyy-MM-dd"));
+        form.AddField("date", targetdate);
+
         WWW www = new WWW(url, form);
 
         yield return www;
 
         var received_data = Regex.Split(www.text, "</next>");
         if (!string.IsNullOrEmpty(www.error)){
-            Debug.Log(www.error);
-            debugtxt.text = www.error;
+            Debug.Log(www.error);//無資料
         }else{
             Debug.Log(www.text);
-            debugtxt.text = www.text;
-            //運動 >=30min 達標
-            
-            if(int.Parse(received_data[1])==0){
-                Membertxt[0].text = "無資料";
-            }else if (int.Parse(received_data[1])>=30){
-                Membertxt[0].text = received_data[0] + "分鐘";
-                Membertxt[0].color = new Color32(45,166,0,255);
-            }else{
-                Membertxt[0].text = received_data[0] + "分鐘";
-                Membertxt[0].color = new Color32(73,72,67,255);
-            }
-            //睡眠 >6hr 達標
-            if (received_data[1]=="0" & received_data[2]=="00"){ //無回傳
-                Membertxt[1].text = "無資料";
-                Membertxt[0].color = new Color32(73,72,67,255);
-            }else if (received_data[1]=="0"){ //60分鐘以內
-                Membertxt[1].text = received_data[2] + "分鐘";
-                Membertxt[0].color = new Color32(73,72,67,255);
-            }else if(received_data[2]=="00"){ //剛好小時 沒有分鐘
-                Membertxt[1].text = received_data[1] + "小時";
-                if (int.Parse(received_data[1])>=6){
-                    Membertxt[1].color = new Color32(45,166,0,255);
-                }else{
-                    Membertxt[1].color = new Color32(73,72,67,255);
-                }
-            }else{
-                Membertxt[1].text = received_data[1] + "小時" + received_data[2]+"分鐘";
-                if (int.Parse(received_data[1])>=6){
-                    Membertxt[1].color = new Color32(45,166,0,255);
-                }else{
-                    Membertxt[1].color = new Color32(73,72,67,255);
-                }
-            }
-            //生活探測器 健康小學堂 社交小達人 動腦時間 1次達標
-            for(int i = 2; i<6 ; i++){
-                if (int.Parse(received_data[i])>0){
-                    Membertxt[i].color = new Color32(45,166,0,255);
-                    Membertxt[i].text = "已完成";
-                }else{
-                    Membertxt[i].color = new Color32(73,72,67,255);
-                    Membertxt[i].text = "未完成";
-                }
-            }
-            
-            
-        
+            //debugtxt.text = www.text;
 
-        
-        //int cnt = (received_data.Length) / 4;
-        /*for (int i = 0; i < cnt; i++)
-        {
-            myfieldid[i] = received_data[3 * i];
-            end[i] = received_data[3 * i + 1 ];
-            fweeding[i] = received_data[3 * i + 2];
-        }*/
-        //Debug.Log(cnt);
+
+            //運動 >=30min 達標
+            Color red = new Color32(207, 102, 101, 255);
+            Color green = new Color32(109,193,81,255);
+            if (int.Parse(received_data[0])>=30){
+                Membertxt[0].text = received_data[0];
+                progessCircle[0].GetComponent<ProgressBar>().GetCurrentFillCircle(30, 30, green);
+            }else{
+                Membertxt[0].text = received_data[0];
+                progessCircle[0].GetComponent<ProgressBar>().GetCurrentFillCircle(30, int.Parse(received_data[0]), red);
+            }
+
+            //睡眠 >6hr 達標
+            if (float.Parse(received_data[1])>=6.0){
+                Membertxt[1].text = received_data[1];
+                progessCircle[1].GetComponent<ProgressBar>().GetCurrentFillCircle(6, 6, green);
+            }else{
+                Membertxt[1].text = received_data[1];
+                progessCircle[1].GetComponent<ProgressBar>().GetCurrentFillCircle(6, float.Parse(received_data[1]), red);
+            }    
+
+            //生活探測器 健康小學堂 社交小達人
+            for(int i = 0; i<3 ; i++){
+                if (int.Parse(received_data[i+2])>0){
+                    doneImg[i].sprite = sprite[1];
+                }else{
+                    doneImg[i].sprite = sprite[0];
+                }
+            }
         }
+
+    }
 
     //set content size
     /*public void matchHeight()
@@ -122,5 +119,4 @@ public class GetDaily : MonoBehaviour
         //var height = Dailytxt.GetComponent<RectTransform>().rect.height+100;
         //content.sizeDelta=new Vector2(0, height);
     }*/
-    }
 }
