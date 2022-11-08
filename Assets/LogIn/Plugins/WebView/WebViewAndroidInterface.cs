@@ -14,6 +14,7 @@ namespace Kogarasi.WebView
 		public void Init( string name )
 		{
 			webView = new AndroidJavaObject( "com.kogarasi.unity.webview.WebViewPlugin" );
+			
 			SafeCall( "Init", name );
 		}
 		
@@ -47,6 +48,7 @@ namespace Kogarasi.WebView
 			if( webView != null )
 			{
 				webView.Call( method, args );
+				
 			}
 			else
 			{
