@@ -39,7 +39,7 @@ public class WebViewTest : MonoBehaviour
 		{
 			//webview.LoadURL( "http://snoopy.nutc.edu.tw/" );
 			//http://snoopy.nutc.edu.tw/
-			webview.SetMargins(0,160,0,0);
+			webview.SetMargins(0,190,0,0);//SetMargins( int left, int top, int right, int bottom );
 			webview.SetVisibility( true );
 			webview.setCallback( m_callback );
 			webview.gameObject.layer = 5;
