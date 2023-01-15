@@ -16,7 +16,7 @@ public class GetHealthGroup : MonoBehaviour
     public TMP_Text date;
     public ScrollRect scrollRect;
     public GameObject[] content = new GameObject[3];
-    public TMP_Text[] Membertxt = new TMP_Text[5]; // ¨B¼Æ ¤ß²v ³Ì¤j ³Ì¤p À£¤O
+    public TMP_Text[] Membertxt = new TMP_Text[5]; // æ­¥æ•¸ å¿ƒç‡ æœ€å¤§ æœ€å° å£“åŠ›
     public GameObject progressCircle;
     private string account;
     private string password;
@@ -27,19 +27,19 @@ public class GetHealthGroup : MonoBehaviour
         StartCoroutine(GetHealthGroups());
         string week = "";
         if(DateTime.Now.DayOfWeek.ToString() == "Monday"){
-            week = "¶g¤@";
+            week = "é€±ä¸€";
         }else if(DateTime.Now.DayOfWeek.ToString() == "Tuesday"){
-            week = "¶g¤G";
+            week = "é€±äºŒ";
         }else if(DateTime.Now.DayOfWeek.ToString() == "Wednesday"){
-            week = "¶g¤T";
+            week = "é€±ä¸‰";
         }else if(DateTime.Now.DayOfWeek.ToString() == "Thursday"){
-            week = "¶g¥|";
+            week = "é€±å››";
         }else if(DateTime.Now.DayOfWeek.ToString() == "Friday"){
-            week = "¶g¤­";
+            week = "é€±äº”";
         }else if(DateTime.Now.DayOfWeek.ToString() == "Saturday"){
-            week = "¶g¤»";
+            week = "é€±å…­";
         }else{
-            week = "¶g¤é";
+            week = "é€±æ—¥";
         }
         date.text = DateTime.Now.Year + " / " + DateTime.Now.Month + " / " + DateTime.Now.Day + "  " + week;
     }
@@ -49,7 +49,7 @@ public class GetHealthGroup : MonoBehaviour
         account=SignIn.account;
         password=SignIn.password;
         
-        //¬d¸ê®Æ  userid 
+        //æŸ¥è³‡æ–™  userid 
         WWWForm form = new WWWForm();
         form.AddField("action", "GetHealthDaily");
         form.AddField("account", account);
@@ -62,47 +62,47 @@ public class GetHealthGroup : MonoBehaviour
         if (!string.IsNullOrEmpty(www.error) || www.text == "0</next>0</next>0</next>0</next>0")
         {
             Debug.Log(www.error);
-            Membertxt[0].text = "µL¸ê®Æ";
-            Membertxt[1].text = "µL¸ê®Æ";
-            Membertxt[2].text = "µL¸ê®Æ";
-            Membertxt[3].text = "µL¸ê®Æ";
-            Membertxt[4].text = "µL¸ê®Æ";
+            Membertxt[0].text = "ç„¡è³‡æ–™";
+            Membertxt[1].text = "ç„¡è³‡æ–™";
+            Membertxt[2].text = "ç„¡è³‡æ–™";
+            Membertxt[3].text = "ç„¡è³‡æ–™";
+            Membertxt[4].text = "ç„¡è³‡æ–™";
             Debug.Log(www.text);
             progressCircle.GetComponent<ProgressBar>().GetCurrentFillValueCircle(5000, 0);
         }
         else{
             Debug.Log(www.text);
             Debug.Log(LoadScenes.healthNum);
-            if(LoadScenes.healthNum == 0){//¨B¼Æ
+            if(LoadScenes.healthNum == 0){//æ­¥æ•¸
                 Membertxt[0].text = received_data[0];
                 progressCircle.GetComponent<ProgressBar>().GetCurrentFillValueCircle(5000, Int32.Parse(received_data[0]));
 
-            }else if(LoadScenes.healthNum == 1){//¤ß²v
+            }else if(LoadScenes.healthNum == 1){//å¿ƒç‡
                 Membertxt[1].text = received_data[1];
-                Membertxt[2].text = received_data[2];//³Ì¤j
-                Membertxt[3].text = received_data[3];//³Ì¤p
+                Membertxt[2].text = received_data[2];//æœ€å¤§
+                Membertxt[3].text = received_data[3];//æœ€å°
 
-            }else if(LoadScenes.healthNum == 2){//À£¤O«ü¼Æ
+            }else if(LoadScenes.healthNum == 2){//å£“åŠ›æŒ‡æ•¸
                 Membertxt[4].text = received_data[4];
             }
             
         }
-        //Åã¥Ü­ş­Óµøµ¡Panel
-        if(LoadScenes.healthNum == 0){//¨B¼Æ
-            Titletxt.text = "¤µ¤é¨B¼Æ";
+        //é¡¯ç¤ºå“ªå€‹è¦–çª—Panel
+        if(LoadScenes.healthNum == 0){//æ­¥æ•¸
+            Titletxt.text = "ä»Šæ—¥æ­¥æ•¸";
             scrollRect.content = content[0].GetComponent<RectTransform>();
             content[0].SetActive(true);
             content[1].SetActive(false);
             content[2].SetActive(false);
-        }else if(LoadScenes.healthNum == 1){//¤ß²v
-            Titletxt.text = "¤ß²vºÊ´ú";
+        }else if(LoadScenes.healthNum == 1){//å¿ƒç‡
+            Titletxt.text = "å¿ƒç‡ç›£æ¸¬";
             scrollRect.content = content[1].GetComponent<RectTransform>();
             content[0].SetActive(false);
             content[1].SetActive(true);
             content[2].SetActive(false);
 
-        }else if(LoadScenes.healthNum == 2){//À£¤O«ü¼Æ
-            Titletxt.text = "À£¤O«ü¼Æ";
+        }else if(LoadScenes.healthNum == 2){//å£“åŠ›æŒ‡æ•¸
+            Titletxt.text = "å£“åŠ›æŒ‡æ•¸";
             scrollRect.content = content[2].GetComponent<RectTransform>();
             content[0].SetActive(false);
             content[1].SetActive(false);

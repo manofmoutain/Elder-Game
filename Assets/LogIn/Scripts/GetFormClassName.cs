@@ -131,12 +131,18 @@ public class GetFormClassName : MonoBehaviour
                 }
 
                 //set url
-                newButton.GetComponentInChildren<Button>().onClick.AddListener(delegate ()
-                {
-                    image[1].sprite = buttonbg[1];
-                    panelBody[3].SetActive(true);
-                    GetComponent<WebViewForm>().geturl(newButton.name,LoadScenes.group5Num+1); // class name  received_data[i] !!!!!!!!
-                });
+                for (int j = 0; j < 2;j++){
+                    newButton.GetComponentsInChildren<Button>()[j].onClick.AddListener(delegate ()
+                    {
+                        image[1].sprite = buttonbg[1];
+                        if (LoadScenes.group5Num % 2 != 0)
+                        {
+                            image[0].sprite = doitbg[2]; // 動手做
+                        }
+                        panelBody[3].SetActive(true);
+                        GetComponent<WebViewForm>().geturl(newButton.name, LoadScenes.group5Num + 1); // class name  received_data[i] !!!!!!!!
+                    });
+                }
 
                 height = newButton.GetComponent<RectTransform>().rect.height;
             }

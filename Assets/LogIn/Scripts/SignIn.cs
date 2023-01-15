@@ -28,7 +28,7 @@ public class SignIn : MonoBehaviour
         if(PlayerPrefs.HasKey("account") && PlayerPrefs.HasKey("password")){
             account = PlayerPrefs.GetString("account");
             password = PlayerPrefs.GetString("password");
-            GetComponent<GetUserID>().gostart(account,password);
+            GetComponent<LoadScenes>().Load("menu");
         }
         
     }
@@ -74,7 +74,7 @@ public class SignIn : MonoBehaviour
             }else{
                 PlayerPrefs.DeleteKey("password");
             }
-            GetComponent<GetUserID>().gostart(account,password);
+            GetComponent<LoadScenes>().Load("menu");
         }else{
             errorGameobj.gameObject.SetActive(true);
         }

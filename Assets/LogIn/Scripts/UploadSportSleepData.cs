@@ -26,7 +26,7 @@ public class UploadSportSleepData : MonoBehaviour
         account=SignIn.account;
         password=SignIn.password;
         
-        //¬d¸ê®Æ  userid 
+        //æŸ¥è³‡æ–™  userid 
         WWWForm form = new WWWForm();
         form.AddField("action", "UploadSportSleepData");
         form.AddField("account", account);

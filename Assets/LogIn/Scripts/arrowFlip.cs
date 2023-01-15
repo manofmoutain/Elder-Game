@@ -25,7 +25,7 @@ public class arrowFlip : MonoBehaviour
         }else{
             arrow.sprite = upSprite;
             calander.SetActive(true);
-            GameObject.Find("¤é´Á #").GetComponent<calander>().appealdate();
+            GameObject.Find("æ—¥æœŸ #").GetComponent<calander>().appealdate();
         }
         
     }

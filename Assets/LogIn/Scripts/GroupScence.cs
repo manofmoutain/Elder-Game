@@ -25,7 +25,7 @@ public class GroupScence : MonoBehaviour
         
         button[0].GetComponent<Button>().onClick.AddListener(delegate () { GetComponent<LoadScenes>().LoadGroup5(LoadScenes.groupNum*2); });
         button[1].GetComponent<Button>().onClick.AddListener(delegate () { 
-            if(LoadScenes.groupNum!=3){
+            if(LoadScenes.groupNum!=2){
                 GetComponent<LoadScenes>().LoadGroup5(LoadScenes.groupNum*2+1); 
             }else{
                 GetComponent<LoadScenes>().Load("game"); // 請陳老師 轉跳遊戲畫面 輸入場景名稱 並加上Panel Head 表頭

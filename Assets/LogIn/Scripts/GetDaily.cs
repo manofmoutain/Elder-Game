@@ -25,8 +25,8 @@ public class GetDaily : MonoBehaviour
     void Start()
     {
         StartCoroutine(GetDailies(DateTime.Now.Date.ToString("yyyy-MM-dd")));
-        TMP_Text datetxt = GameObject.Find("selDate").GetComponent<TMP_Text>(); //³q¹L¦W¦r¡A§ä¨ìµe­±¤¤ªº¬ÛÀ³ª«¥ó
-        datetxt.text = DateTime.Now.Year + "¦~" + DateTime.Now.Month + "¤ë" + DateTime.Now.Day + "¤é " + weekENtoZW(DateTime.Now.DayOfWeek.ToString());
+        TMP_Text datetxt = GameObject.Find("selDate").GetComponent<TMP_Text>(); //é€šéåå­—ï¼Œæ‰¾åˆ°ç•«é¢ä¸­çš„ç›¸æ‡‰ç‰©ä»¶
+        datetxt.text = DateTime.Now.Year + "å¹´" + DateTime.Now.Month + "æœˆ" + DateTime.Now.Day + "æ—¥ " + weekENtoZW(DateTime.Now.DayOfWeek.ToString());
         
     }
     public void gostart(string date)
@@ -39,19 +39,19 @@ public class GetDaily : MonoBehaviour
     private string weekENtoZW(string week){
         Debug.Log(week);
         if(week == "Monday"){
-            return  "©P¤@";
+            return  "å‘¨ä¸€";
         }else if(week == "Tuesday"){
-            return "©P¤G";
+            return "å‘¨äºŒ";
         }else if(week == "Wednesday"){
-            return "©P¤T";
+            return "å‘¨ä¸‰";
         }else if(week == "Thursday"){
-            return "©P¥|";
+            return "å‘¨å››";
         }else if(week == "Friday"){
-           return "©P¤­";
+           return "å‘¨äº”";
         }else if(week == "Saturday"){
-            return "©P¤»";
+            return "å‘¨å…­";
         }else{
-            return "©P¤é";
+            return "å‘¨æ—¥";
         }
     }
     void Update() {
@@ -62,7 +62,7 @@ public class GetDaily : MonoBehaviour
         account=SignIn.account;
         password=SignIn.password;
         
-        //¬d¸ê®Æ  userid 
+        //æŸ¥è³‡æ–™  userid 
         WWWForm form = new WWWForm();
         form.AddField("action", "GetDaily");
         form.AddField("account", account);
@@ -75,13 +75,13 @@ public class GetDaily : MonoBehaviour
 
         var received_data = Regex.Split(www.text, "</next>");
         if (!string.IsNullOrEmpty(www.error)){
-            Debug.Log(www.error);//µL¸ê®Æ
+            Debug.Log(www.error);//ç„¡è³‡æ–™
         }else{
             Debug.Log(www.text);
             //debugtxt.text = www.text;
 
 
-            //¹B°Ê >=30min ¹F¼Ğ
+            //é‹å‹• >=30min é”æ¨™
             Color red = new Color32(207, 102, 101, 255);
             Color green = new Color32(109,193,81,255);
             if (int.Parse(received_data[0])>=30){
@@ -92,7 +92,7 @@ public class GetDaily : MonoBehaviour
                 progessCircle[0].GetComponent<ProgressBar>().GetCurrentFillCircle(30, int.Parse(received_data[0]), red);
             }
 
-            //ºÎ¯v >6hr ¹F¼Ğ
+            //ç¡çœ  >6hr é”æ¨™
             if (float.Parse(received_data[1])>=6.0){
                 Membertxt[1].text = received_data[1];
                 progessCircle[1].GetComponent<ProgressBar>().GetCurrentFillCircle(6, 6, green);
@@ -101,7 +101,7 @@ public class GetDaily : MonoBehaviour
                 progessCircle[1].GetComponent<ProgressBar>().GetCurrentFillCircle(6, float.Parse(received_data[1]), red);
             }    
 
-            //¥Í¬¡±´´ú¾¹ °·±d¤p¾Ç°ó ªÀ¥æ¤p¹F¤H
+            //ç”Ÿæ´»æ¢æ¸¬å™¨ å¥åº·å°å­¸å ‚ ç¤¾äº¤å°é”äºº
             for(int i = 0; i<3 ; i++){
                 if (int.Parse(received_data[i+2])>0){
                     doneImg[i].sprite = sprite[1];
